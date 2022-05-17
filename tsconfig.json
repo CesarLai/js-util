@@ -8,21 +8,34 @@
     "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "lib": ["dom", "es6", "es2020"],
+    "lib": [
+      "dom",
+      "es6",
+      "es2020"
+    ],
     "allowJs": false,
     "esModuleInterop": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "isolatedModules": true,
     "incremental": true
   },
-  "include": ["src/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
