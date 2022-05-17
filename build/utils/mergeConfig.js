@@ -1,3 +1,22 @@
+const mergeItems = (base, next) => {
+  const baseItems = []
+  const nextItems = []
+
+  if (Array.isArray(base)) {
+    baseItems.push(...base)
+  } else if (typeof base === 'object' && next) {
+    baseItems.push(base)
+  }
+
+  if (Array.isArray(next)) {
+    nextItems.push(...next)
+  } else if (typeof next === 'object' && next) {
+    nextItems.push(next)
+  }
+
+  return baseItems.concat(...nextItems)
+}
+
 const mergeConfig = (baseConfig, next) => {
   let nextConfig
   if (typeof next === 'function') {
@@ -9,8 +28,9 @@ const mergeConfig = (baseConfig, next) => {
   const merged = {
     ...baseConfig,
     ...nextConfig,
-    plugins: [...(baseConfig.plugins || []), ...(nextConfig.plugins || [])],
-    external: [...(baseConfig.external || []), ...(nextConfig.external || [])]
+    plugins: mergeItems(baseConfig.plugins, nextConfig.plugins),
+    external: mergeItems(baseConfig.external, nextConfig.external),
+    output: mergeItems(baseConfig.output, nextConfig.output)
   }
   return merged
 }

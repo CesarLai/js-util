@@ -7,27 +7,32 @@ import rollupEslint from '@rollup/plugin-eslint'
 import { terser as rollupTerser } from 'rollup-plugin-terser'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 
-import getTsconfig from './utils/getTsconfig'
-
 const ROOT_PATH = path.resolve(__dirname, '../')
 
 export default {
   plugins: [
     rollupNodeResolve({ preferBuiltins: false }),
     rollupJson(),
-    rollupTypescript(getTsconfig()),
+    rollupTypescript({ tsconfig: path.resolve(ROOT_PATH, 'tsconfig.json') }),
     rollupBabel({
       configFile: path.resolve(ROOT_PATH, '.babelrc'),
       babelHelpers: 'runtime',
       extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx', '.json']
     }),
-    rollupEslint()
+    rollupEslint(),
+    rollupTerser()
   ],
   external: ['fs', 'path'],
-  output: {
-    dir: path.resolve(ROOT_PATH, 'dist'),
-    format: 'cjs',
-    sourcemap: true,
-    plugins: [rollupTerser()]
-  }
+  output: [
+    {
+      dir: path.resolve(ROOT_PATH, 'dist'),
+      format: 'cjs',
+      sourcemap: true
+    },
+    {
+      dir: path.resolve(ROOT_PATH, 'dist'),
+      format: 'esm',
+      sourcemap: true
+    }
+  ]
 }
