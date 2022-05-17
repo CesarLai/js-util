@@ -7,7 +7,10 @@
   "repository": "git@github.com:CesarLai/js-utils.git",
   "author": "Cesar Lai <git@cesarlai.com>",
   "license": "MIT",
-  "types": "./index.d.ts",
+  "types": "dist/index.d.ts",
+  "contributors": [
+    "Cesar Lai <git@cesarlai.com>"
+  ],
   "files": [
     "dist",
     "CHANGELOG.md",

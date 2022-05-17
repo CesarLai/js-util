@@ -1,11 +1,14 @@
 import path from 'path'
-import rollupTypescript from '@rollup/plugin-typescript'
 import rollupJson from '@rollup/plugin-json'
-import { babel as rollupBabel } from '@rollup/plugin-babel'
+import {
+  babel as rollupBabel,
+  getBabelOutputPlugin
+} from '@rollup/plugin-babel'
 import { nodeResolve as rollupNodeResolve } from '@rollup/plugin-node-resolve'
 import rollupEslint from '@rollup/plugin-eslint'
 import { terser as rollupTerser } from 'rollup-plugin-terser'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
+import packageJson from '../package.json'
 
 const ROOT_PATH = path.resolve(__dirname, '../')
 
@@ -13,11 +16,15 @@ export default {
   plugins: [
     rollupNodeResolve({ preferBuiltins: false }),
     rollupJson(),
-    rollupTypescript({ tsconfig: path.resolve(ROOT_PATH, 'tsconfig.json') }),
     rollupBabel({
       configFile: path.resolve(ROOT_PATH, '.babelrc'),
       babelHelpers: 'runtime',
       extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx', '.json']
+    }),
+    getBabelOutputPlugin({
+      allowAllFormats: true,
+      configFile: path.resolve(ROOT_PATH, '.babelrc'),
+      runtimeHelpers: true
     }),
     rollupEslint(),
     rollupTerser()
@@ -25,12 +32,12 @@ export default {
   external: ['fs', 'path'],
   output: [
     {
-      dir: path.resolve(ROOT_PATH, 'dist'),
+      file: packageJson.main,
       format: 'cjs',
       sourcemap: true
     },
     {
-      dir: path.resolve(ROOT_PATH, 'dist'),
+      file: packageJson.module,
       format: 'esm',
       sourcemap: true
     }
