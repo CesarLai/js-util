@@ -1,11 +1,20 @@
 {
   "name": "@cesarlai/js-utils",
   "version": "0.1.0",
-  "description": "A javascript utils module, built with rollup.",
-  "main": "index.js",
-  "repository": "git@github.com:CesarLai/js-util.git",
+  "description": "JavaScript常用工具集，按功能分类封装实用的工具。",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "repository": "git@github.com:CesarLai/js-utils.git",
   "author": "Cesar Lai <git@cesarlai.com>",
   "license": "MIT",
+  "types": "./index.d.ts",
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c build/rollup.config.prod.js"
   },
