@@ -1,6 +1,6 @@
 {
   "name": "@cesarlai/js-utils",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "JavaScript常用工具集，按功能分类封装实用的工具。",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
