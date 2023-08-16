@@ -1,67 +1,65 @@
-# js-utils
+# jslib
 
-JavaScript 常用工具集，按功能分类封装实用的工具。
+A javascript lib that provide a lot of utils, built with rollup.
 
-## 安装
+## Getting Started
+
+installtion
 
 ```sh
-npm install --save @cesarlai/js-utils
+npm install --save @cesarlai/jslib
 ```
 
-## 提供的函数
+## API
 
 - regex
-  - isHttp() - 判断是否为合法的 HTTP 地址
-  - parseHttpUrl() - 将 HTTP 地址解析为对象
+  - isHttp() - validate a string is valid http url or not
+  - parseHttpUrl() - parse http url to an object
 - transform
-  - camelize() - 对象驼峰化函数
+  - camelize() - transform all the object keys to camelcase style
 
-## 用法演示
+## Usage
 
-### regex 模块
+### Regex Module
 
 #### isHttp
 
-判断是否为合法的 HTTP 地址
+validate a string is valid http url or not
 
 ```ts
-import { RegexUtil } from '@cesarlai/js-utils'
+import { RegexUtil } from '@cesarlai/jslib'
 
 RegexUtil.isHttpUrl(
   'https://cloud.platform.com/login?s_url=https%3A%2F%2Fconsole.cloud.platform.com%2Fservicemarket/'
 ) // true
-RegexUtil.isHttpUrl(
-  'https://github.com'
-) // true
+RegexUtil.isHttpUrl('https://github.com') // true
 RegexUtil.isHttpUrl(
   'http://code.visualstudio.com/docs/editor/debugging#_start-debugging'
 ) // true
+RegexUtil.isHttpUrl('wss://broadcast.chat.stream.com:7826/sub?platform=web') // false
 RegexUtil.isHttpUrl(
-  'wss://broadcast.chat.stream.com:7826/sub?platform=web'
-) // false
-RegexUtil.isHttpUrl(
-  "https://i0.stream.com/bfs/live/e791556706f88d88b4846a61a583b31db007f83d.wasm"
+  'https://i0.stream.com/bfs/live/e791556706f88d88b4846a61a583b31db007f83d.wasm'
 ) // true
 ```
 
 #### parseHttpUrl
 
-将 HTTP 地址解析为对象
+parse http url to an object
 
 ```ts
-import { RegexUtil } from '@cesarlai/js-utils'
+import { RegexUtil } from '@cesarlai/jslib'
 
 const result = RegexUtil.parseHttpUrl(
   'https://cloud.platform.com/login?s_url=https%3A%2F%2Fconsole.cloud.platform.com%2Fservicemarket/'
 )
-// 结果
+// result
 // {
 //   protocol: 'https',
 //   host: 'cloud.platform.com',
 //   port: undefined,
 //   path: '/login',
-//   query: { 
-//     s_url: 'https://console.cloud.platform.com/servicemarket/' 
+//   query: {
+//     s_url: 'https://console.cloud.platform.com/servicemarket/'
 //   },
 //   id: undefined
 // }
@@ -69,7 +67,7 @@ const result = RegexUtil.parseHttpUrl(
 const result = RegexUtil.parseHttpUrl(
   'http://code.visualstudio.com/docs/editor/debugging#_start-debugging/'
 )
-// 结果
+// result
 // {
 //   protocol: 'http',
 //   host: 'code.visualstudio.com',
@@ -80,18 +78,18 @@ const result = RegexUtil.parseHttpUrl(
 // }
 ```
 
-### transform 模块
+### Transform Module
 
 #### camelize
 
-将对象的属性驼峰化。
+transform all the object keys to camelcase style
 
 ```ts
-import { TransformUtil } from '@cesarlai/js-utils'
+import { TransformUtil } from '@cesarlai/jslib'
 
 const origin = {
   'aaa-bbb': '123',
-  'ccc_ddd': 123,
+  ccc_ddd: 123,
   'hhhhhh_ell-o world': 1024,
   goodCode: true,
   none: undefined,
@@ -99,7 +97,7 @@ const origin = {
 }
 
 TransformUtil.camelize(origin)
-// 结果
+// result
 // {
 //   aaaBbb: '123',
 //   cccDdd: 123,
@@ -110,10 +108,10 @@ TransformUtil.camelize(origin)
 // }
 ```
 
-自定义空白符
+custom the separators that should be replaced
 
 ```ts
-import { TransformUtil } from '@cesarlai/js-utils'
+import { TransformUtil } from '@cesarlai/jslib'
 
 const origin = {
   'aaa-bbb': '123',
@@ -127,7 +125,7 @@ const origin = {
 }
 
 TransformUtil.camelize(origin, '[\\.\\-\\_\\+]')
-// 结果
+// result
 // {
 //   'aaa-bbb': '123',
 //   cccDdd: 123,
