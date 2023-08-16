@@ -32,7 +32,8 @@
     "url": "git@github.com:CesarLai/jslib.git"
   },
   "scripts": {
-    "build": "rimraf dist && rollup -c build/rollup.config.prod.js"
+    "prebuild": "rimraf dist",
+    "build": "rollup -c build/rollup.config.prod.js"
   },
   "devDependencies": {
     "@babel/core": "7.17.10",
